@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山と月と浜の家 — 山と海のあいだの、小さな実験室</title>
+    <meta name="description" content="秋田県にかほ町の空き家をリノベーションしたアトリエスペース「山と月と浜の家」。手仕事、AI、対話、表現の実験室。">
+
+    <!-- OGP -->
+    <meta property="og:title" content="山と月と浜の家 — 山と海のあいだの、小さな実験室">
+    <meta property="og:description" content="秋田県にかほ町の空き家をリノベーションしたアトリエスペース。手仕事、AI、対話、表現の実験室。">
+    <meta property="og:image" content="https://hamanoie.com/hamanoie-hero.jpeg">
+    <meta property="og:url" content="https://hamanoie.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="山と月と浜の家 — 山と海のあいだの、小さな実験室">
+    <meta name="twitter:description" content="秋田県にかほ町の空き家をリノベーションしたアトリエスペース。手仕事、AI、対話、表現の実験室。">
+    <meta name="twitter:image" content="https://hamanoie.com/hamanoie-hero.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FAFAF8;
+            --warm-white: #F4F5F0;
+            --sage-tint: #EDEEE8;
+            --text-primary: #2A2C28;
+            --text-secondary: #5E6358;
+            --text-light: #919689;
+            --accent-green: #6B7C5E;
+            --accent-deep: #4A5A3C;
+            --border: #DDE0D5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-weight: 300; color: var(--text-primary);
+            background-color: var(--white); line-height: 1.9;
+            letter-spacing: 0.03em; -webkit-font-smoothing: antialiased;
+        }
+
+        .nav {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+            padding: 1.8rem 3rem; display: flex; justify-content: space-between;
+            align-items: center; transition: all 0.5s ease;
+        }
+        .nav.scrolled {
+            background: rgba(250,250,248,0.92); backdrop-filter: blur(20px);
+            padding: 1.2rem 3rem; border-bottom: 1px solid var(--border);
+        }
+        .nav-logo {
+            font-family: 'Shippori Mincho', serif; font-weight: 400;
+            font-size: 0.9rem; letter-spacing: 0.15em;
+            color: var(--text-primary); text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-family: 'Cormorant Garamond', serif; font-weight: 400;
+            font-size: 0.85rem; letter-spacing: 0.15em;
+            color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .hero {
+            position: relative; width: 100%; height: 100vh;
+            min-height: 600px; overflow: hidden; background-color: #2A2C28;
+        }
+        .hero-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center center;
+            opacity: 0; animation: fadeIn 2s ease-out 0.3s forwards;
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(42,44,40,0.15) 0%, rgba(42,44,40,0) 30%,
+                rgba(42,44,40,0) 50%, rgba(42,44,40,0.5) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: absolute; bottom: 6rem; left: 0; width: 100%;
+            text-align: center; z-index: 2;
+            opacity: 0; animation: fadeUp 1.5s ease-out 1s forwards;
+        }
+        .hero-name {
+            font-family: 'Shippori Mincho', serif; font-weight: 400;
+            font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: 0.2em;
+            color: #FAFAF8; margin-bottom: 1.2rem;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+        }
+        .hero-tagline {
+            font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 300;
+            font-size: clamp(0.8rem, 1.3vw, 1rem); letter-spacing: 0.2em;
+            color: rgba(250,250,248,0.85); text-shadow: 0 1px 6px rgba(0,0,0,0.1);
+        }
+        .scroll-indicator {
+            position: absolute; bottom: 2rem; left: 50%;
+            transform: translateX(-50%); z-index: 3;
+            opacity: 0; animation: fadeIn 1s ease-out 2s forwards;
+        }
+        .scroll-indicator span {
+            display: block; width: 1px; height: 40px;
+            background: rgba(250,250,248,0.4); margin: 0 auto;
+            animation: scrollPulse 2.5s ease-in-out infinite;
+        }
+
+        section { padding: 7rem 2rem; }
+        .container { max-width: 680px; margin: 0 auto; }
+        .section-label {
+            font-family: 'Cormorant Garamond', serif; font-weight: 400;
+            font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 3.5rem;
+        }
+
+        .about { background-color: var(--white); }
+        .about-text p {
+            font-size: 0.95rem; color: var(--text-primary);
+            margin-bottom: 2rem; line-height: 2.2;
+        }
+        .about-text p:last-child { margin-bottom: 0; }
+        .about-note { font-size: 0.85rem; color: var(--text-light); margin-top: 2.5rem; }
+
+        .gallery { background-color: var(--warm-white); padding: 7rem 2rem; }
+        .gallery .container { max-width: 900px; }
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .gallery-item { overflow: hidden; aspect-ratio: 4 / 3; }
+        .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
+        .gallery-item.wide { grid-column: span 2; }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.03); }
+
+        .access { background-color: var(--sage-tint); }
+        .access-info { font-size: 0.92rem; color: var(--text-primary); line-height: 2.2; margin-bottom: 2.5rem; }
+        .access-info .label {
+            font-size: 0.78rem; letter-spacing: 0.15em;
+            color: var(--text-light); margin-bottom: 0.3rem; margin-top: 1.8rem;
+        }
+        .access-info .label:first-child { margin-top: 0; }
+        .access-caution {
+            font-size: 0.82rem; color: var(--text-light); line-height: 2;
+            margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
+        }
+        .map-container {
+            width: 100%; height: 300px; margin-top: 2.5rem;
+            filter: grayscale(30%) contrast(0.95);
+        }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+
+        .contact { background-color: var(--white); text-align: center; }
+        .contact .section-label { margin-bottom: 2rem; }
+        .contact-text { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
+        .contact-link {
+            font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400;
+            font-size: 0.9rem; color: var(--text-primary); text-decoration: none;
+            padding-bottom: 2px; border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s ease;
+            display: inline-flex; align-items: center; gap: 0.8rem;
+        }
+        .contact-link:hover { border-color: var(--accent-green); }
+        .contact-link svg {
+            width: 18px; height: 18px; fill: var(--text-secondary);
+            transition: fill 0.3s ease;
+        }
+        .contact-link:hover svg { fill: var(--accent-green); }
+
+        .footer {
+            padding: 3rem 2rem; text-align: center;
+            background-color: var(--white); border-top: 1px solid var(--border);
+        }
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif; font-weight: 300;
+            font-size: 0.75rem; letter-spacing: 0.2em; color: var(--text-light);
+        }
+        .footer-owner { margin-top: 0.5rem; }
+        .footer-owner a {
+            font-family: 'Cormorant Garamond', serif; font-weight: 300;
+            font-size: 0.7rem; letter-spacing: 0.15em;
+            color: var(--text-light); text-decoration: none; transition: color 0.3s ease;
+        }
+        .footer-owner a:hover { color: var(--accent-green); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.2; transform: scaleY(0.6); transform-origin: top; }
+            50% { opacity: 0.5; transform: scaleY(1); }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1.2rem 1.5rem; }
+            .nav.scrolled { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a { font-size: 0.75rem; }
+            section { padding: 5rem 1.5rem; }
+            .hero-content { bottom: 4rem; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+            .gallery-item.tall { grid-row: span 1; aspect-ratio: 4 / 3; }
+            .gallery-item.wide { grid-column: span 1; }
+            .map-container { height: 240px; }
+        }
+        @media (max-width: 480px) { .nav-logo { font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">山と月と浜の家</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#access">Access</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <img src="hamanoie-hero.jpeg" alt="山と月と浜の家 — 壁画のある座敷空間" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-name">山と月と浜の家</h1>
+            <p class="hero-tagline">山と海のあいだの、小さな実験室。</p>
+        </div>
+        <div class="scroll-indicator"><span></span></div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <p class="section-label reveal">About</p>
+            <div class="about-text">
+                <p class="reveal">秋田県にかほ町の空き家をリノベーションした<br>アトリエスペースです。</p>
+                <p class="reveal">手仕事、AI、対話、表現——<br>そのとき関心のあることを持ち寄って、<br>小さく実験するための場所。</p>
+                <p class="about-note reveal">イベント時のみオープンしています。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <div class="container">
+            <p class="section-label reveal">Space</p>
+            <div class="gallery-grid">
+                <div class="gallery-item tall reveal"><img src="hamanoie-fusuma.jpeg" alt="蓮の葉が描かれたふすま" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="hamanoie-chair.jpeg" alt="窓辺のロッキングチェアと作品棚" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="hamanoie-plants.jpeg" alt="植物と本棚のある窓辺" loading="lazy"></div>
+                <div class="gallery-item wide reveal"><img src="hamanoie-kitchen.jpeg" alt="キッチンとダイニングテーブル" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="access" id="access">
+        <div class="container">
+            <p class="section-label reveal">Access</p>
+            <div class="access-info reveal">
+                <p class="label">所在地</p>
+                <p>〒018-0109 秋田県にかほ市象潟町冠石下48</p>
+                <p class="label">最寄駅</p>
+                <p>JR 象潟（きさかた）駅より徒歩10分（700m）</p>
+            </div>
+            <div class="access-caution reveal">
+                イベント時のみオープンしています。<br>
+                スケジュールをご確認のうえ、お申し込みをお願いいたします。<br>
+                ※ 突然の訪問等はご遠慮ください。<br>
+                ※ スペースのレンタルはしておりません。
+            </div>
+            <div class="map-container reveal">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3095.!2d139.9!3d39.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z44CSODAxOC0wMTA5IOenkueUsOecjOOBq-OBi-OBu-W4guixoemfk-eUuuWGoOefs-S4izQ4!5e0!3m2!1sja!2sjp!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <p class="section-label reveal">Contact</p>
+            <p class="contact-text reveal">お問い合わせやイベント情報は<br>Instagramからご確認ください。</p>
+            <a href="https://www.instagram.com/yamatotukitohamanoie/" target="_blank" rel="noopener" class="contact-link reveal">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                @yamatotukitohamanoie
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-text">&copy; 2026 山と月と浜の家</p>
+        <p class="footer-owner"><a href="https://www.emisuto.com" target="_blank" rel="noopener">Emi Suto</a></p>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), index * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
