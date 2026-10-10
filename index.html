@@ -259,6 +259,100 @@
         .story-text .last { color: var(--teal); }
         .story-stones { width: 220px; }
 
+        /* 玄関の 札 */
+        .fuda {
+            position: absolute;
+            right: 5vw;
+            top: 50vh;
+            z-index: 3;
+            width: 48px;
+            height: 170px;
+            border: 0;
+            background: none;
+            cursor: pointer;
+            perspective: 600px;
+        }
+        .fuda::before {                                /* ひも */
+            content: "";
+            position: absolute;
+            left: 50%; top: -34px;
+            width: 2px; height: 36px;
+            background: #6F6A62;
+        }
+        .fuda-face {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            font-family: var(--mincho);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.25em;
+            border-radius: 4px;
+            backface-visibility: hidden;
+            transition: transform 0.7s;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+        }
+        .fuda-front { background: var(--wood); color: var(--sumi); border: 2px solid var(--wood-d); }
+        .fuda-back { background: var(--teal); color: var(--wall); transform: rotateY(180deg); }
+        .fuda.flip .fuda-front { transform: rotateY(180deg); }
+        .fuda.flip .fuda-back { transform: rotateY(360deg); }
+        .fuda.open .fuda-front { background: var(--olive); }
+
+        /* こよみ */
+        .koyomi-lead { margin-bottom: 40px; color: var(--muted); }
+        .koyomi { position: relative; padding-left: 34px; }
+        .koyomi::before {                              /* しめなわ みたいな 線 */
+            content: "";
+            position: absolute;
+            left: 8px; top: 6px; bottom: 6px;
+            width: 4px;
+            background: repeating-linear-gradient(180deg, var(--wood) 0 10px, var(--wood-d) 10px 14px);
+            border-radius: 2px;
+        }
+        .year { position: relative; margin-bottom: 40px; }
+        .year h3 {
+            position: relative;
+            font-family: var(--mincho);
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 0.1em;
+            margin-bottom: 14px;
+        }
+        .year h3::before {
+            content: "";
+            position: absolute;
+            left: -34px; top: 50%;
+            width: 20px; height: 20px;
+            transform: translateY(-50%);
+            background: var(--moon);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--wall);
+        }
+        .ev {
+            display: grid;
+            grid-template-columns: 4.5em 1fr;
+            gap: 16px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            background: #FFFDF7;
+            box-shadow: 0 6px 16px rgba(60, 45, 25, 0.1);
+        }
+        .ev-date { font-family: var(--mincho); font-weight: 600; color: var(--teal); }
+        .ev h4 { font-family: var(--mincho); font-weight: 600; font-size: 17px; line-height: 1.7; }
+        .ev h4 a { text-decoration-color: var(--olive); text-underline-offset: 4px; }
+        .ev p { font-size: 14px; color: var(--muted); }
+        .ev p b { color: var(--text); font-weight: 600; }
+        .ev-star { border-left: 6px solid var(--olive); }
+        .ev-photo { margin-top: 12px; max-width: 520px; }
+        .ev-photo img, .ev-photo video { width: 100%; display: block; background: var(--wall2); cursor: pointer; }
+        .ev-photo figcaption { margin-top: 4px; font-size: 12px; color: var(--muted); }
+        .koyomi-more { font-size: 14px; color: var(--muted); margin: -10px 0 26px; }
+        .koyomi-next { font-family: var(--mincho); font-size: 18px; }
+        .koyomi-next span { display: inline-block; margin-left: 6px; padding: 2px 14px; background: var(--wood); border-radius: 4px; font-size: 15px; }
+
         /* へや（写真を 紙に はったみたいに） */
         .rooms {
             display: grid;
@@ -369,6 +463,9 @@
             .story-text { writing-mode: horizontal-tb; height: auto; font-size: 15px; margin: 0; }
             .story-text p { margin: 0 0 1.4em; }
             .story-stones { width: 160px; margin: 0 auto; }
+            .fuda { right: 16px; top: auto; bottom: 8vh; width: 40px; height: 140px; }
+            .fuda-face { font-size: 14px; }
+            .ev { grid-template-columns: 1fr; gap: 4px; padding: 14px 16px; }
             .rooms { grid-template-columns: 1fr 1fr; gap: 30px 18px; }
             .photo { padding: 8px 8px 36px; }
             .photo figcaption { font-size: 12px; left: 10px; bottom: 8px; }
@@ -424,6 +521,7 @@
         <a href="#top" class="nav-logo">山と月と浜の家</a>
         <ul class="nav-links">
             <li><a href="#story">はなし</a></li>
+            <li><a href="#koyomi">こよみ</a></li>
             <li><a href="#rooms">へや</a></li>
             <li><a href="#place">ばしょ</a></li>
             <li><a href="#letter">おたより</a></li>
@@ -505,6 +603,12 @@
         </div>
         <p class="hero-hint">月の ランプを おすと……？</p>
 
+        <!-- 玄関の 札（うらがえすと つぎの予定） -->
+        <button class="fuda" id="fuda" type="button" aria-label="いまの ようす">
+            <span class="fuda-face fuda-front" id="fudaFront">おやすみちゅう</span>
+            <span class="fuda-face fuda-back" id="fudaBack">つぎは みてい</span>
+        </button>
+
         <!-- ふすま -->
         <div class="fusuma" id="fusuma">
             <div class="kamoi"></div>
@@ -576,6 +680,50 @@
                         <path d="M178 250 L188 214 Q194 204 206 206 L214 210 Q220 230 220 250 Z" fill="#8F8E89"/>
                     </g>
                 </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== この家の こよみ ===== -->
+    <section class="sec" id="koyomi">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <svg viewBox="0 0 110 26" aria-hidden="true"><rect width="110" height="26" rx="8" fill="#1E5A56" filter="url(#rough)"/><use href="#spiral" x="4" y="1" width="24" height="24"/><use href="#spiral" x="30" y="1" width="24" height="24"/><use href="#spiral" x="56" y="1" width="24" height="24"/><use href="#spiral" x="82" y="1" width="24" height="24"/></svg>
+                <h2>この家の こよみ</h2>
+                <span class="en">calendar</span>
+            </div>
+            <p class="koyomi-lead reveal">この家で あったこと。ふだんは しずかに ねむっていて、ときどき ひらきます。</p>
+
+            <div class="koyomi">
+                <div class="year reveal"><h3>2022</h3>
+                    <article class="ev"><p class="ev-date">10.2</p><div><h4>第一回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会（なおらい）。</p></div></article>
+                </div>
+
+                <div class="year reveal"><h3>2023</h3>
+                    <article class="ev"><p class="ev-date">5月</p><div><h4>ヒーリングライアーの 会</h4><p>いしいひろこさん</p></div></article>
+                    <article class="ev"><p class="ev-date">6月</p><div><h4>森と 海底湧水の 関係、海藻の 可能性について</h4><p>海藻研究所 所長 新井章吾さんの 講演と 質疑応答</p>
+                        <figure class="ev-photo"><img src="events/2023-06-arai-lecture.jpg" alt="スクリーンを囲んで講演を聞く参加者たち（後ろ姿）" loading="lazy"></figure></div></article>
+                    <article class="ev ev-star"><p class="ev-date">6月</p><div><h4>壁に 絵を 描く</h4><p>豊島さやかさんの ライブペイントと マルシェ。<br><b>いまの 座敷の 壁画は、この日に 生まれました。</b></p>
+                        <figure class="ev-photo"><video src="events/2023-06-mural-livepaint.mp4" poster="events/2023-06-mural-poster.jpg" muted loop playsinline preload="none" aria-label="壁画が描かれていく様子（早送り）"></video><figcaption>▶ 壁画が できていく ところ（はやおくり）</figcaption></figure></div></article>
+                    <article class="ev"><p class="ev-date">10月</p><div><h4>第二回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p></div></article>
+                </div>
+
+                <div class="year reveal"><h3>2024</h3>
+                    <article class="ev"><p class="ev-date">秋</p><div><h4>第三回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4></div></article>
+                </div>
+
+                <div class="year reveal"><h3>2025</h3>
+                    <article class="ev"><p class="ev-date">秋</p><div><h4>第四回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4></div></article>
+                </div>
+
+                <div class="year reveal"><h3>2026</h3>
+                    <article class="ev"><p class="ev-date">9.30</p><div><h4>山の プロに 教わる 歩き方講座</h4><p>修行の まえの日に、からだの つかいかたを。</p>
+                        <figure class="ev-photo"><img src="events/2026-09-walking.jpg" alt="壁画の前で歩き方を教わる参加者たち（後ろ姿）" loading="lazy"></figure></div></article>
+                    <article class="ev"><p class="ev-date">10.1</p><div><h4>第五回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p></div></article>
+                </div>
+
+                <p class="koyomi-more reveal">このほかにも、みそづくり・お茶会・ヨガ なども やりました。</p>
+                <p class="koyomi-next reveal" id="koyomiNext">つぎは……　<span>ただいま おやすみちゅう</span></p>
             </div>
         </div>
     </section>
@@ -686,6 +834,24 @@
             b.classList.add('away');
             setTimeout(() => b.classList.remove('away'), 4200);
         }));
+
+        /* 玄関の 札：つぎの予定が きまったら ここに かく（なければ null） */
+        const NEXT = null;   // 例：{ date: '11.3', title: 'みそづくりの 会' }
+        const fuda = document.getElementById('fuda');
+        if (NEXT) {
+            fuda.classList.add('open');
+            document.getElementById('fudaFront').textContent = 'ひらきます';
+            document.getElementById('fudaBack').textContent = NEXT.date + ' ' + NEXT.title;
+            document.querySelector('#koyomiNext span').textContent = NEXT.date + '　' + NEXT.title;
+        }
+        fuda.addEventListener('click', () => fuda.classList.toggle('flip'));
+
+        /* ライブペイントの 動画：見えたら うごく（動きが にがてな人には とめておく） */
+        const vid = document.querySelector('.ev video');
+        if (vid) {
+            if (!reduce) new IntersectionObserver(([e]) => { e.isIntersecting ? vid.play().catch(() => {}) : vid.pause(); }, { threshold: 0.4 }).observe(vid);
+            vid.addEventListener('click', () => vid.paused ? vid.play() : vid.pause());
+        }
 
         /* 写真を おおきく */
         const lb = document.getElementById('lightbox');
