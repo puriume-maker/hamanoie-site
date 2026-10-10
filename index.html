@@ -346,6 +346,28 @@
         .ev p { font-size: 14px; color: var(--muted); }
         .ev p b { color: var(--text); font-weight: 600; }
         .ev-star { border-left: 6px solid var(--olive); }
+        .ev-photos { display: grid; gap: 8px; margin-top: 12px; max-width: 560px; }
+        .ev-photos.n2 { grid-template-columns: 1fr 1fr; }
+        .ev-photos.n4 { grid-template-columns: repeat(4, 1fr); max-width: 640px; }
+        .ev-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; cursor: zoom-in; background: var(--wall2); }
+        .ev-photos.n1 img { aspect-ratio: auto; max-height: 360px; object-fit: cover; }
+        .ev-photos.n4 img { aspect-ratio: 1; }
+        /* アルバム */
+        .album { columns: 4 200px; column-gap: 22px; }
+        .snap {
+            break-inside: avoid;
+            margin: 0 0 24px;
+            padding: 8px 8px 30px;
+            background: #FFFDF7;
+            box-shadow: 0 8px 18px rgba(60, 45, 25, 0.14);
+            position: relative;
+        }
+        .snap:nth-child(4n+1) { transform: rotate(-1.5deg); }
+        .snap:nth-child(4n+2) { transform: rotate(1.2deg); }
+        .snap:nth-child(4n+3) { transform: rotate(-0.6deg); }
+        .snap:nth-child(4n) { transform: rotate(1.8deg); }
+        .snap img { width: 100%; cursor: zoom-in; }
+        .snap figcaption { position: absolute; left: 10px; bottom: 6px; font-size: 13px; }
         .ev-photo { margin-top: 12px; max-width: 520px; }
         .ev-photo img, .ev-photo video { width: 100%; display: block; background: var(--wall2); cursor: pointer; }
         .ev-photo figcaption { margin-top: 4px; font-size: 12px; color: var(--muted); }
@@ -466,6 +488,10 @@
             .fuda { right: 16px; top: auto; bottom: 8vh; width: 40px; height: 140px; }
             .fuda-face { font-size: 14px; }
             .ev { grid-template-columns: 1fr; gap: 4px; padding: 14px 16px; }
+            .ev-photos.n4 { grid-template-columns: 1fr 1fr; }
+            .album { columns: 2; column-gap: 14px; }
+            .snap { margin-bottom: 16px; padding: 6px 6px 26px; }
+            .snap figcaption { font-size: 11px; }
             .rooms { grid-template-columns: 1fr 1fr; gap: 30px 18px; }
             .photo { padding: 8px 8px 36px; }
             .photo figcaption { font-size: 12px; left: 10px; bottom: 8px; }
@@ -473,6 +499,12 @@
             .photo.wide { grid-column: span 2; }
             .place { grid-template-columns: 1fr; gap: 0; }
             .place dd { margin-bottom: 12px; }
+        }
+
+        @media (max-width: 560px) {
+            .nav { justify-content: center; }
+            .nav-logo { display: none; }
+            .nav-links { gap: 12px; font-size: 13px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -523,6 +555,7 @@
             <li><a href="#story">はなし</a></li>
             <li><a href="#koyomi">こよみ</a></li>
             <li><a href="#rooms">へや</a></li>
+            <li><a href="#album">アルバム</a></li>
             <li><a href="#place">ばしょ</a></li>
             <li><a href="#letter">おたより</a></li>
         </ul>
@@ -696,33 +729,55 @@
 
             <div class="koyomi">
                 <div class="year reveal"><h3>2022</h3>
-                    <article class="ev"><p class="ev-date">10.2</p><div><h4>第一回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会（なおらい）。</p></div></article>
+                    <article class="ev"><p class="ev-date">夏〜秋</p><div><h4>家を なおす</h4><p>ほねぐみだけに なった 家に、少しずつ 手を 入れました。玄関の 階段には 貝がら。</p>
+                        <div class="ev-photos n4"><img src="events/2022-reform-frame.jpg" alt="ほねぐみだけになった家の中" loading="lazy" data-zoom><img src="events/2022-reform-shells.jpg" alt="貝がらを埋めこんだ玄関の階段" loading="lazy" data-zoom><img src="events/2022-reform-fusuma.jpg" alt="できあがった葉っぱのふすまの前で" loading="lazy" data-zoom><img src="events/2022-reform-stove.jpg" alt="レンガの壁と薪ストーブ" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">10.2</p><div><h4>第一回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会（なおらい）。</p>
+                        <div class="ev-photos n1"><img src="events/2022-10-shugyo1.jpg" alt="第一回 山伏修行の直会" loading="lazy" data-zoom></div></div></article>
                 </div>
-
                 <div class="year reveal"><h3>2023</h3>
-                    <article class="ev"><p class="ev-date">5月</p><div><h4>ヒーリングライアーの 会</h4><p>いしいひろこさん</p></div></article>
-                    <article class="ev"><p class="ev-date">6月</p><div><h4>森と 海底湧水の 関係、海藻の 可能性について</h4><p>海藻研究所 所長 新井章吾さんの 講演と 質疑応答</p>
-                        <figure class="ev-photo"><img src="events/2023-06-arai-lecture.jpg" alt="スクリーンを囲んで講演を聞く参加者たち（後ろ姿）" loading="lazy"></figure></div></article>
-                    <article class="ev ev-star"><p class="ev-date">6月</p><div><h4>壁に 絵を 描く</h4><p>豊島さやかさんの ライブペイントと マルシェ。<br><b>いまの 座敷の 壁画は、この日に 生まれました。</b></p>
-                        <figure class="ev-photo"><video src="events/2023-06-mural-livepaint.mp4" poster="events/2023-06-mural-poster.jpg" muted loop playsinline preload="none" aria-label="壁画が描かれていく様子（早送り）"></video><figcaption>▶ 壁画が できていく ところ（はやおくり）</figcaption></figure></div></article>
-                    <article class="ev"><p class="ev-date">10月</p><div><h4>第二回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p></div></article>
+                    <article class="ev"><p class="ev-date">春</p><div><h4>ヨガと 香りの セミナー</h4>
+                        <div class="ev-photos n1"><img src="events/2023-yoga-aroma.jpg" alt="窓辺のテーブルでのセミナー" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">4.29</p><div><h4>映画「君の根は」上映会</h4>
+                        <div class="ev-photos n1"><img src="events/2023-04-kiminone.jpg" alt="スクリーンで映画を観る人たち" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">5.27</p><div><h4>ヒーリングライアーの 会</h4><p>いしいひろこさん</p>
+                        <div class="ev-photos n1"><img src="events/2023-05-lyre.jpg" alt="ライアーを奏でるいしいひろこさん" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">6.3</p><div><h4>森と 海底湧水の 関係、海藻の 可能性について</h4><p>海藻研究所 所長 新井章吾さんの 講演と 質疑応答。海べにも 出かけました。</p>
+                        <div class="ev-photos n2"><img src="events/2023-06-arai-lecture.jpg" alt="スクリーンを囲んで講演を聞く参加者たち" loading="lazy" data-zoom><img src="events/2023-06-arai-sea.jpg" alt="海べの石のあいだをのぞきこむ" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev ev-star"><p class="ev-date">6.17</p><div><h4>壁に 絵を 描く</h4><p>豊島さやかさんの ライブペイントアートと マルシェ。<br><b>いまの 座敷の 壁画は、この日に 生まれました。</b></p>
+                        <figure class="ev-photo"><video src="events/2023-06-mural-livepaint.mp4" poster="events/2023-06-mural-poster.jpg" muted loop playsinline preload="none" aria-label="壁画が描かれていく様子（早送り）"></video><figcaption>▶ 壁画が できていく ところ（はやおくり）</figcaption></figure>
+                        <div class="ev-photos n1"><img src="events/2023-06-mural-ladder.jpg" alt="脚立にのぼって、うずまきの帯を描く" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">8.20</p><div><h4>ちいさな 映画上映会「ヒルデガルト 緑のよろこび」</h4>
+                        <div class="ev-photos n1"><img src="events/2023-08-hildegard.jpg" alt="壁画の前のスクリーンで映画を観る" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">10.1</p><div><h4>第二回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p>
+                        <div class="ev-photos n1"><img src="events/2023-10-shugyo2.jpg" alt="第二回 山伏修行の直会" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">10.8</p><div><h4>OPEN DAY with Cafe iro</h4><p>家を ひらいて、コーヒーを。</p>
+                        <div class="ev-photos n1"><img src="events/2023-10-openday.jpg" alt="OPEN DAY with Cafe iro のおしらせ" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">11.4</p><div><h4>中国茶の お茶会「Blue Camellia」</h4>
+                        <div class="ev-photos n1"><img src="events/2023-11-tea.jpg" alt="中国茶をいれるところ" loading="lazy" data-zoom></div></div></article>
                 </div>
-
                 <div class="year reveal"><h3>2024</h3>
-                    <article class="ev"><p class="ev-date">秋</p><div><h4>第三回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4></div></article>
+                    <article class="ev"><p class="ev-date">5.26</p><div><h4>みそづくり</h4>
+                        <div class="ev-photos n1"><img src="events/2024-05-miso.jpg" alt="みんなで味噌を仕込む" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">5.30</p><div><h4>ラテアート</h4>
+                        <div class="ev-photos n1"><img src="events/2024-05-latte.jpg" alt="顔の描かれたカフェラテ" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">8.10-11</p><div><h4>月と 植物に まつわる 手仕事の マルシェ</h4>
+                        <div class="ev-photos n1"><img src="events/2024-08-marche.jpg" alt="藍染めの服などがならぶマルシェ" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">10月</p><div><h4>かご編み ワークショップ</h4>
+                        <div class="ev-photos n1"><img src="events/2024-10-kago.jpg" alt="窓辺にならんだ編みあがったかご" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">秋</p><div><h4>第三回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>この年の 直会は、べつの 会場で。</p></div></article>
                 </div>
-
                 <div class="year reveal"><h3>2025</h3>
-                    <article class="ev"><p class="ev-date">秋</p><div><h4>第四回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4></div></article>
+                    <article class="ev"><p class="ev-date">10.1</p><div><h4>第四回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p>
+                        <div class="ev-photos n1"><img src="events/2025-10-shugyo4.jpg" alt="第四回 山伏修行の直会" loading="lazy" data-zoom></div></div></article>
                 </div>
-
                 <div class="year reveal"><h3>2026</h3>
                     <article class="ev"><p class="ev-date">9.30</p><div><h4>山の プロに 教わる 歩き方講座</h4><p>修行の まえの日に、からだの つかいかたを。</p>
-                        <figure class="ev-photo"><img src="events/2026-09-walking.jpg" alt="壁画の前で歩き方を教わる参加者たち（後ろ姿）" loading="lazy"></figure></div></article>
-                    <article class="ev"><p class="ev-date">10.1</p><div><h4>第五回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p></div></article>
+                        <div class="ev-photos n1"><img src="events/2026-09-walking.jpg" alt="壁画の前で歩き方を教わる" loading="lazy" data-zoom></div></div></article>
+                    <article class="ev"><p class="ev-date">10.1</p><div><h4>第五回 <a href="https://chokaimikumari.com/" target="_blank" rel="noopener">鳥海山山伏修行</a></h4><p>修行の あと、この家で 直会。</p>
+                        <div class="ev-photos n1"><img src="events/2026-10-shugyo5.jpg" alt="第五回 山伏修行の直会" loading="lazy" data-zoom></div></div></article>
                 </div>
 
-                <p class="koyomi-more reveal">このほかにも、みそづくり・お茶会・ヨガ なども やりました。</p>
+                <p class="koyomi-more reveal">このほかにも、お茶会や ヨガ、ちいさな 集まりを ときどき。</p>
                 <p class="koyomi-next reveal" id="koyomiNext">つぎは……　<span>ただいま おやすみちゅう</span></p>
             </div>
         </div>
@@ -742,6 +797,35 @@
                 <button class="photo reveal" type="button"><img src="hamanoie-chair.jpeg" alt="窓辺のロッキングチェアと作品棚" loading="lazy"><figcaption>窓辺の ロッキングチェア</figcaption></button>
                 <button class="photo reveal" type="button"><img src="hamanoie-plants.jpeg" alt="植物と本棚のある窓辺" loading="lazy"><figcaption>植物と 本棚</figcaption></button>
                 <button class="photo reveal" type="button"><img src="hamanoie-kitchen.jpeg" alt="キッチンとダイニングテーブル" loading="lazy"><figcaption>キッチン</figcaption></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== この家の アルバム ===== -->
+    <section class="sec" id="album">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <svg viewBox="0 0 110 26" aria-hidden="true"><rect width="110" height="26" rx="8" fill="#1E5A56" filter="url(#rough)"/><use href="#spiral" x="4" y="1" width="24" height="24"/><use href="#spiral" x="30" y="1" width="24" height="24"/><use href="#spiral" x="56" y="1" width="24" height="24"/><use href="#spiral" x="82" y="1" width="24" height="24"/></svg>
+                <h2>この家の アルバム</h2>
+                <span class="en">album</span>
+            </div>
+            <div class="album">
+                <figure class="snap reveal"><img src="album/stove.jpg" alt="薪ストーブ" loading="lazy" data-zoom><figcaption>薪ストーブ</figcaption></figure>
+                <figure class="snap reveal"><img src="album/tsuki-room.jpg" alt="月ちゃんも います" loading="lazy" data-zoom><figcaption>月ちゃんも います</figcaption></figure>
+                <figure class="snap reveal"><img src="album/latte.jpg" alt="ラテアート" loading="lazy" data-zoom><figcaption>ラテアート</figcaption></figure>
+                <figure class="snap reveal"><img src="album/rainbow.jpg" alt="家の まえに にじ" loading="lazy" data-zoom><figcaption>家の まえに にじ</figcaption></figure>
+                <figure class="snap reveal"><img src="album/shimenawa.jpg" alt="しめ縄と ふすま" loading="lazy" data-zoom><figcaption>しめ縄と ふすま</figcaption></figure>
+                <figure class="snap reveal"><img src="album/cakes.jpg" alt="おやつの じかん" loading="lazy" data-zoom><figcaption>おやつの じかん</figcaption></figure>
+                <figure class="snap reveal"><img src="album/tsuki-plants.jpg" alt="植物の まえの 月ちゃん" loading="lazy" data-zoom><figcaption>植物の まえの 月ちゃん</figcaption></figure>
+                <figure class="snap reveal"><img src="album/basket.jpg" alt="かごを 編む" loading="lazy" data-zoom><figcaption>かごを 編む</figcaption></figure>
+                <figure class="snap reveal"><img src="album/hydrangea.jpg" alt="あじさい" loading="lazy" data-zoom><figcaption>あじさい</figcaption></figure>
+                <figure class="snap reveal"><img src="album/window-desk.jpg" alt="窓辺の 机" loading="lazy" data-zoom><figcaption>窓辺の 机</figcaption></figure>
+                <figure class="snap reveal"><img src="album/coffee.jpg" alt="コーヒーを いれる" loading="lazy" data-zoom><figcaption>コーヒーを いれる</figcaption></figure>
+                <figure class="snap reveal"><img src="album/blue-art.jpg" alt="青い 絵" loading="lazy" data-zoom><figcaption>青い 絵</figcaption></figure>
+                <figure class="snap reveal"><img src="album/plants-care.jpg" alt="植物の 手入れ" loading="lazy" data-zoom><figcaption>植物の 手入れ</figcaption></figure>
+                <figure class="snap reveal"><img src="album/tsuki-kitchen.jpg" alt="キッチンの 月ちゃん" loading="lazy" data-zoom><figcaption>キッチンの 月ちゃん</figcaption></figure>
+                <figure class="snap reveal"><img src="album/wreath.jpg" alt="ハーブの リース" loading="lazy" data-zoom><figcaption>ハーブの リース</figcaption></figure>
+                <figure class="snap reveal"><img src="album/mural.jpg" alt="夜の 壁画" loading="lazy" data-zoom><figcaption>夜の 壁画</figcaption></figure>
             </div>
         </div>
     </section>
@@ -855,13 +939,14 @@
 
         /* 写真を おおきく */
         const lb = document.getElementById('lightbox');
-        document.querySelectorAll('.photo').forEach(p => p.addEventListener('click', () => {
-            const img = p.querySelector('img');
+        function zoom(img, cap) {
             document.getElementById('lbImg').src = img.src;
             document.getElementById('lbImg').alt = img.alt;
-            document.getElementById('lbCap').textContent = p.querySelector('figcaption').textContent;
+            document.getElementById('lbCap').textContent = cap || img.alt;
             lb.hidden = false;
-        }));
+        }
+        document.querySelectorAll('.photo').forEach(p => p.addEventListener('click', () => zoom(p.querySelector('img'), p.querySelector('figcaption').textContent)));
+        document.querySelectorAll('img[data-zoom]').forEach(img => img.addEventListener('click', () => zoom(img)));
         lb.addEventListener('click', () => { lb.hidden = true; });
         window.addEventListener('keydown', e => { if (e.key === 'Escape') lb.hidden = true; });
 
