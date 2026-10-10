@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>山と月と浜の家 — 山と海のあいだの、小さな実験室</title>
-    <meta name="description" content="秋田県にかほ町の空き家をリノベーションしたアトリエスペース「山と月と浜の家」。手仕事、AI、対話、表現の実験室。">
+    <meta name="description" content="秋田県にかほ町の空き家をひらいた「山と月と浜の家」。手仕事、AI、対話、表現の、小さな実験室。">
 
     <!-- OGP -->
     <meta property="og:title" content="山と月と浜の家 — 山と海のあいだの、小さな実験室">
-    <meta property="og:description" content="秋田県にかほ町の空き家をリノベーションしたアトリエスペース。手仕事、AI、対話、表現の実験室。">
+    <meta property="og:description" content="秋田県にかほ町の空き家をひらいた、手仕事、AI、対話、表現の実験室。">
     <meta property="og:image" content="https://hamanoie.com/ogp.png">
     <meta property="og:url" content="https://hamanoie.com">
     <meta property="og:type" content="website">
@@ -17,7 +17,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="山と月と浜の家 — 山と海のあいだの、小さな実験室">
-    <meta name="twitter:description" content="秋田県にかほ町の空き家をリノベーションしたアトリエスペース。手仕事、AI、対話、表現の実験室。">
+    <meta name="twitter:description" content="秋田県にかほ町の空き家をひらいた、手仕事、AI、対話、表現の実験室。">
     <meta name="twitter:image" content="https://hamanoie.com/ogp.png">
 
     <!-- Favicon -->
@@ -25,288 +25,688 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+    <script>document.documentElement.classList.add('js');</script>
     <style>
         :root {
-            --white: #FAFAF8;
-            --warm-white: #F4F5F0;
-            --sage-tint: #EDEEE8;
-            --text-primary: #2A2C28;
-            --text-secondary: #5E6358;
-            --text-light: #919689;
-            --accent-green: #6B7C5E;
-            --accent-deep: #4A5A3C;
-            --border: #DDE0D5;
+            /* 壁画から とった いろ */
+            --wall: #F6F2E8;
+            --wall2: #EDE6D6;
+            --sumi: #23252E;
+            --navy: #252A3D;
+            --indigo: #1E2247;
+            --umber: #5B4A37;
+            --olive: #C3B65F;
+            --stone: #8F8E89;
+            --teal: #1E5A56;
+            --leaf: #4FAE84;
+            --wood: #C79A68;
+            --wood-d: #9C7148;
+            --moon: #F3D58A;
+            --text: #2A2A2E;
+            --muted: #6F6A62;
+            --mincho: 'Shippori Mincho', serif;
+            --hand: 'Klee One', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
+        html { scroll-behavior: smooth; background: var(--wall); }
         body {
-            font-family: 'Zen Kaku Gothic New', sans-serif;
-            font-weight: 300; color: var(--text-primary);
-            background-color: var(--white); line-height: 1.9;
-            letter-spacing: 0.03em; -webkit-font-smoothing: antialiased;
+            font-family: var(--hand);
+            color: var(--text);
+            background: var(--wall);
+            line-height: 2;
+            letter-spacing: 0.06em;
+            overflow-x: clip;
+        }
+        a { color: inherit; }
+        img { display: block; max-width: 100%; }
+        ::selection { background: var(--olive); }
+
+        /* しっくいの 壁の ざらざら */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 90;
+            opacity: 0.12;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .25  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
         }
 
+        /* ===== ナビ ===== */
         .nav {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-            padding: 1.8rem 3rem; display: flex; justify-content: space-between;
-            align-items: center; transition: all 0.5s ease;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 60;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            transition: background 0.4s;
         }
-        .nav.scrolled {
-            background: rgba(250,250,248,0.92); backdrop-filter: blur(20px);
-            padding: 1.2rem 3rem; border-bottom: 1px solid var(--border);
-        }
-        .nav-logo {
-            font-family: 'Shippori Mincho', serif; font-weight: 400;
-            font-size: 0.9rem; letter-spacing: 0.15em;
-            color: var(--text-primary); text-decoration: none;
-        }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            font-family: 'Cormorant Garamond', serif; font-weight: 400;
-            font-size: 0.85rem; letter-spacing: 0.15em;
-            color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--text-primary); }
+        .nav.scrolled { background: rgba(246, 242, 232, 0.92); backdrop-filter: blur(6px); }
+        .nav-logo { font-family: var(--mincho); font-weight: 600; font-size: 16px; letter-spacing: 0.15em; text-decoration: none; }
+        .nav-links { display: flex; gap: 26px; list-style: none; font-size: 14px; }
+        .nav-links a { text-decoration: none; }
+        .nav-links a:hover { color: var(--teal); }
 
+        /* ===== HERO：壁画の かべ ＋ ふすま ===== */
         .hero {
-            position: relative; width: 100%; height: 100vh;
-            min-height: 600px; overflow: hidden; background-color: #2A2C28;
+            position: relative;
+            height: 100vh;
+            height: 100svh;
+            min-height: 560px;
+            overflow: hidden;
+            background: var(--wall);
         }
-        .hero-image {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; object-position: center center;
-            opacity: 0; animation: fadeIn 2s ease-out 0.3s forwards;
+        .mural {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
         }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom,
-                rgba(42,44,40,0.15) 0%, rgba(42,44,40,0) 30%,
-                rgba(42,44,40,0) 50%, rgba(42,44,40,0.5) 100%);
-            z-index: 1;
+        .mural .stone { cursor: pointer; transform-box: fill-box; transform-origin: 50% 100%; }
+        .mural .stone.wobble { animation: wobble 0.7s ease; }
+        .mural .bird { cursor: pointer; transition: transform 1.6s cubic-bezier(.3, .1, .3, 1), opacity 0.6s; }
+        .mural .bird.away { transform: translate(-900px, -500px) scale(0.6); opacity: 0; }
+        .mural .lamp { cursor: pointer; }
+        .mural .glow { transition: opacity 0.8s; }
+        .night-veil { transition: opacity 0.8s; pointer-events: none; }
+        .hero.lights-off .glow { opacity: 0; }
+        .hero.lights-off .night-veil { opacity: 0.55; }
+        .hero.lights-off .lamp-shade { fill: #E7DCC0; }
+
+        .hero-text {
+            position: absolute;
+            left: 7vw;
+            top: 16vh;
+            z-index: 2;
+            pointer-events: none;
         }
-        .hero-content {
-            position: absolute; bottom: 6rem; left: 0; width: 100%;
-            text-align: center; z-index: 2;
-            opacity: 0; animation: fadeUp 1.5s ease-out 1s forwards;
+        .hero-text h1 {
+            font-family: var(--mincho);
+            font-weight: 600;
+            font-size: clamp(30px, 4.6vw, 58px);
+            letter-spacing: 0.18em;
+            line-height: 1.4;
         }
-        .hero-name {
-            font-family: 'Shippori Mincho', serif; font-weight: 400;
-            font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: 0.2em;
-            color: #FAFAF8; margin-bottom: 1.2rem;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.15);
-        }
-        .hero-tagline {
-            font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 300;
-            font-size: clamp(0.8rem, 1.3vw, 1rem); letter-spacing: 0.2em;
-            color: rgba(250,250,248,0.85); text-shadow: 0 1px 6px rgba(0,0,0,0.1);
-        }
-        .scroll-indicator {
-            position: absolute; bottom: 2rem; left: 50%;
-            transform: translateX(-50%); z-index: 3;
-            opacity: 0; animation: fadeIn 1s ease-out 2s forwards;
-        }
-        .scroll-indicator span {
-            display: block; width: 1px; height: 40px;
-            background: rgba(250,250,248,0.4); margin: 0 auto;
-            animation: scrollPulse 2.5s ease-in-out infinite;
+        .hero-text p { margin-top: 10px; font-size: clamp(14px, 1.4vw, 17px); color: var(--muted); }
+        .hero-hint {
+            position: absolute;
+            right: 6vw;
+            bottom: 6vh;
+            z-index: 2;
+            font-size: 13px;
+            color: var(--muted);
+            pointer-events: none;
         }
 
-        section { padding: 7rem 2rem; }
-        .container { max-width: 680px; margin: 0 auto; }
-        .section-label {
-            font-family: 'Cormorant Garamond', serif; font-weight: 400;
-            font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase;
-            color: var(--text-light); margin-bottom: 3.5rem;
+        /* ふすま */
+        .fusuma {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+        }
+        .kamoi, .shikii { height: 22px; background: var(--wood); box-shadow: inset 0 -3px 0 var(--wood-d); flex: none; position: relative; z-index: 2; }
+        .shikii { box-shadow: inset 0 3px 0 var(--wood-d); }
+        .ranma { height: 9vh; flex: none; background: var(--wall2); display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 6px solid var(--wood); position: relative; z-index: 2; }
+        .ranma span { border-right: 6px solid var(--wood); }
+        .ranma span:last-child { border-right: 0; }
+        .panels { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); }
+        .panel {
+            position: relative;
+            border: 9px solid var(--wood);
+            border-top: 0;
+            border-bottom: 0;
+            margin-right: -9px;
+            background:
+                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='.02 .25' numOctaves='3'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .4  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23w)'/></svg>"),
+                #F4EFE2;
+            transition: transform 1.3s cubic-bezier(.65, 0, .25, 1);
+            overflow: hidden;
+        }
+        .panel:nth-child(1) { z-index: 4; }
+        .panel:nth-child(2) { z-index: 5; }
+        .panel:nth-child(3) { z-index: 5; }
+        .panel:nth-child(4) { z-index: 4; }
+        .panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .panel .hikite {
+            position: absolute;
+            top: 52%;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #8C6A45 0 40%, var(--wood) 42%);
+        }
+        .panel:nth-child(odd) .hikite { right: 12px; }
+        .panel:nth-child(even) .hikite { left: 12px; }
+        .fusuma.open .panel:nth-child(1) { transform: translateX(-100%); }
+        .fusuma.open .panel:nth-child(2) { transform: translateX(-200%); }
+        .fusuma.open .panel:nth-child(3) { transform: translateX(200%); }
+        .fusuma.open .panel:nth-child(4) { transform: translateX(100%); }
+        .fusuma.open .kamoi, .fusuma.open .shikii, .fusuma.open .ranma { opacity: 0; transition: opacity 0.6s 1s; }
+        .fusuma.gone { display: none; }
+
+        .knock {
+            position: absolute;
+            left: 50%;
+            bottom: 12vh;
+            transform: translateX(-50%);
+            z-index: 30;
+            padding: 12px 30px 12px 34px;
+            font-family: var(--mincho);
+            font-size: 17px;
+            letter-spacing: 0.3em;
+            color: var(--wall);
+            background: var(--navy);
+            border: 0;
+            border-radius: 40px;
+            box-shadow: 0 6px 0 var(--indigo);
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s, opacity 0.5s;
+        }
+        .knock:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 8px 0 var(--indigo); }
+        .knock:active { transform: translateX(-50%) translateY(4px); box-shadow: 0 2px 0 var(--indigo); }
+        .fusuma.open .knock { opacity: 0; pointer-events: none; }
+        .noren {
+            position: absolute;
+            left: 50%;
+            top: calc(22px + 9vh + 6px);
+            transform: translateX(-50%);
+            z-index: 30;
+            writing-mode: vertical-rl;
+            padding: 22px 14px;
+            font-family: var(--mincho);
+            font-weight: 600;
+            font-size: clamp(16px, 2vw, 22px);
+            letter-spacing: 0.35em;
+            color: var(--wall);
+            background: var(--teal);
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+            transition: opacity 0.4s;
+        }
+        .fusuma.open .noren { opacity: 0; }
+
+        /* ===== セクション 共通 ===== */
+        .sec { position: relative; padding: 120px 24px 40px; }
+        .wrap { max-width: 980px; margin: 0 auto; }
+        .sec-head { display: flex; align-items: center; gap: 18px; margin-bottom: 48px; }
+        .sec-head h2 { font-family: var(--mincho); font-weight: 600; font-size: 26px; letter-spacing: 0.25em; }
+        .sec-head .en { font-size: 12px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; }
+        .sec-head svg { width: 110px; height: 26px; flex: none; }
+
+        /* この家の はなし（たて書き） */
+        .story {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 48px;
+            align-items: start;
+        }
+        .story-text {
+            writing-mode: vertical-rl;
+            height: 30em;
+            font-size: 17px;
+            line-height: 2.4;
+            letter-spacing: 0.14em;
+            margin: 0 auto;
+        }
+        .story-text p { margin-left: 1.6em; }
+        .story-text .last { color: var(--teal); }
+        .story-stones { width: 220px; }
+
+        /* へや（写真を 紙に はったみたいに） */
+        .rooms {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 44px 34px;
+        }
+        .photo {
+            position: relative;
+            padding: 12px 12px 46px;
+            background: #FFFDF7;
+            box-shadow: 0 10px 22px rgba(60, 45, 25, 0.16);
+            transition: transform 0.35s ease, box-shadow 0.35s;
+            cursor: zoom-in;
+            border: 0;
+            text-align: left;
+            font: inherit;
+            color: inherit;
+        }
+        .photo:nth-child(3n+1) { transform: rotate(-2deg); }
+        .photo:nth-child(3n+2) { transform: rotate(1.5deg); margin-top: 24px; }
+        .photo:nth-child(3n) { transform: rotate(-1deg); }
+        .photo:hover { transform: rotate(0) translateY(-6px); box-shadow: 0 18px 30px rgba(60, 45, 25, 0.22); }
+        .photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+        .photo figcaption { position: absolute; left: 14px; bottom: 10px; font-size: 14px; }
+        .photo::before {                              /* マスキングテープ */
+            content: "";
+            position: absolute;
+            top: -10px; left: 50%;
+            width: 74px; height: 22px;
+            transform: translateX(-50%) rotate(-3deg);
+            background: rgba(195, 182, 95, 0.55);
+        }
+        .photo.wide { grid-column: span 2; }
+        .photo.wide img { aspect-ratio: 16 / 10; }
+
+        /* ルーペ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: rgba(35, 37, 46, 0.86);
+            cursor: zoom-out;
+        }
+        .lightbox[hidden] { display: none; }
+        .lightbox img { max-height: 86vh; width: auto; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); }
+        .lightbox p { margin-top: 14px; color: var(--wall); text-align: center; }
+
+        /* ばしょ */
+        .place {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 28px;
+            font-size: 16px;
+        }
+        .place dt { color: var(--muted); }
+        .notice {
+            margin-top: 34px;
+            padding: 22px 26px;
+            background: var(--wall2);
+            border-left: 6px solid var(--teal);
+            font-size: 14px;
+            line-height: 2.1;
         }
 
-        .about { background-color: var(--white); }
-        .about-text p {
-            font-size: 0.95rem; color: var(--text-primary);
-            margin-bottom: 2rem; line-height: 2.2;
+        /* おたより */
+        .letter-text { font-size: 16px; }
+        .btn {
+            display: inline-block;
+            margin-top: 26px;
+            padding: 12px 30px;
+            font-family: var(--mincho);
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--wall);
+            background: var(--teal);
+            border-radius: 40px;
+            box-shadow: 0 5px 0 #133B38;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
-        .about-text p:last-child { margin-bottom: 0; }
-        .about-note { font-size: 0.85rem; color: var(--text-light); margin-top: 2.5rem; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #133B38; }
 
-        .gallery { background-color: var(--warm-white); padding: 7rem 2rem; }
-        .gallery .container { max-width: 900px; }
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-        .gallery-item { overflow: hidden; aspect-ratio: 4 / 3; }
-        .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
-        .gallery-item.wide { grid-column: span 2; }
-        .gallery-item img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        .gallery-item:hover img { transform: scale(1.03); }
+        .footer { padding: 120px 24px 60px; text-align: center; font-size: 13px; color: var(--muted); }
+        .footer svg { width: 140px; height: 70px; margin: 0 auto 20px; display: block; }
+        .footer a { text-decoration-color: var(--olive); text-underline-offset: 4px; }
 
-        .access { background-color: var(--sage-tint); }
-        .access-info { font-size: 0.92rem; color: var(--text-primary); line-height: 2.2; margin-bottom: 2.5rem; }
-        .access-info .label {
-            font-size: 0.78rem; letter-spacing: 0.15em;
-            color: var(--text-light); margin-bottom: 0.3rem; margin-top: 1.8rem;
-        }
-        .access-info .label:first-child { margin-top: 0; }
-        .access-caution {
-            font-size: 0.82rem; color: var(--text-light); line-height: 2;
-            margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
-        }
-        .map-container {
-            width: 100%; height: 300px; margin-top: 2.5rem;
-            filter: grayscale(30%) contrast(0.95);
-        }
-        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s, transform 0.9s; }
+        .js .reveal.on { opacity: 1; transform: none; }
 
-        .contact { background-color: var(--white); text-align: center; }
-        .contact .section-label { margin-bottom: 2rem; }
-        .contact-text { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
-        .contact-link {
-            font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400;
-            font-size: 0.9rem; color: var(--text-primary); text-decoration: none;
-            padding-bottom: 2px; border-bottom: 1px solid var(--border);
-            transition: border-color 0.3s ease;
-            display: inline-flex; align-items: center; gap: 0.8rem;
+        @keyframes wobble {
+            20% { transform: rotate(-5deg); }
+            45% { transform: rotate(4deg); }
+            70% { transform: rotate(-2deg); }
+            100% { transform: rotate(0); }
         }
-        .contact-link:hover { border-color: var(--accent-green); }
-        .contact-link svg {
-            width: 18px; height: 18px; fill: var(--text-secondary);
-            transition: fill 0.3s ease;
-        }
-        .contact-link:hover svg { fill: var(--accent-green); }
 
-        .footer {
-            padding: 3rem 2rem; text-align: center;
-            background-color: var(--white); border-top: 1px solid var(--border);
+        @media (max-width: 760px) {
+            .nav { padding: 12px 16px; }
+            .nav-links { gap: 14px; font-size: 13px; }
+            .hero-text { left: 20px; right: 20px; top: 11vh; }
+            .hero-hint { display: none; }
+            .ranma { height: 6vh; }
+            .panel { border-width: 6px; margin-right: -6px; }
+            .knock { bottom: 9vh; font-size: 15px; }
+            .story { grid-template-columns: 1fr; }
+            .story-text { writing-mode: horizontal-tb; height: auto; font-size: 15px; margin: 0; }
+            .story-text p { margin: 0 0 1.4em; }
+            .story-stones { width: 160px; margin: 0 auto; }
+            .rooms { grid-template-columns: 1fr 1fr; gap: 30px 18px; }
+            .photo { padding: 8px 8px 36px; }
+            .photo figcaption { font-size: 12px; left: 10px; bottom: 8px; }
+            .photo:nth-child(3n+2) { margin-top: 0; }
+            .photo.wide { grid-column: span 2; }
+            .place { grid-template-columns: 1fr; gap: 0; }
+            .place dd { margin-bottom: 12px; }
         }
-        .footer-text {
-            font-family: 'Cormorant Garamond', serif; font-weight: 300;
-            font-size: 0.75rem; letter-spacing: 0.2em; color: var(--text-light);
-        }
-        .footer-owner { margin-top: 0.5rem; }
-        .footer-owner a {
-            font-family: 'Cormorant Garamond', serif; font-weight: 300;
-            font-size: 0.7rem; letter-spacing: 0.15em;
-            color: var(--text-light); text-decoration: none; transition: color 0.3s ease;
-        }
-        .footer-owner a:hover { color: var(--accent-green); }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.2; transform: scaleY(0.6); transform-origin: top; }
-            50% { opacity: 0.5; transform: scaleY(1); }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
         }
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 768px) {
-            .nav { padding: 1.2rem 1.5rem; }
-            .nav.scrolled { padding: 1rem 1.5rem; }
-            .nav-links { gap: 1.5rem; }
-            .nav-links a { font-size: 0.75rem; }
-            section { padding: 5rem 1.5rem; }
-            .hero-content { bottom: 4rem; }
-            .gallery-grid { grid-template-columns: 1fr; gap: 0.8rem; }
-            .gallery-item.tall { grid-row: span 1; aspect-ratio: 4 / 3; }
-            .gallery-item.wide { grid-column: span 1; }
-            .map-container { height: 240px; }
-        }
-        @media (max-width: 480px) { .nav-logo { font-size: 0.8rem; } }
     </style>
 </head>
 <body>
+    <!-- 使いまわす かたち（葉っぱ・うずまき・鳥） -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <!-- 手で ちぎった みたいな ふち -->
+            <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <!-- 葉っぱの 拓本みたいな かすれ -->
+            <filter id="print" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="7" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -2.4 1.75" result="m"/>
+                <feComposite in="SourceGraphic" in2="m" operator="in" result="p"/>
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="2" result="n2"/>
+                <feDisplacementMap in="p" in2="n2" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <symbol id="leaf" viewBox="-100 -100 200 200" overflow="visible">
+                <path d="M0 0 L-9 89 A90 90 0 1 1 9 89 Z" fill="#4FAE84"/>
+                <g stroke="#C9EBD6" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85">
+                    <path d="M0 0 L-70 -52 M0 0 L-86 -6 M0 0 L-74 44 M0 0 L-34 -82 M0 0 L10 -88 M0 0 L52 -72 M0 0 L82 -30 M0 0 L84 22 M0 0 L62 62"/>
+                    <path d="M-40 -30 l-12 -16 M-50 4 l-16 -8 M-42 26 l-14 10 M30 -42 l6 -20 M48 -18 l18 -10 M50 12 l18 4"/>
+                </g>
+                <ellipse cx="0" cy="8" rx="6" ry="9" fill="#F4EFE2"/>
+            </symbol>
+            <symbol id="spiral" viewBox="0 0 44 44">
+                <g fill="none" stroke="#F6F2E8" stroke-width="2.4">
+                    <rect x="5" y="5" width="34" height="34" rx="11"/>
+                    <rect x="11" y="11" width="22" height="22" rx="7"/>
+                    <rect x="17" y="17" width="10" height="10" rx="3"/>
+                </g>
+            </symbol>
+            <path id="birdPath" d="M0 0 C-18 -20 -40 -24 -64 -20 C-40 -10 -22 -2 -8 6 C-22 18 -36 32 -44 48 C-20 36 -2 20 8 6 C22 4 34 -2 44 -12 C28 -8 14 -4 0 0 Z"/>
+        </defs>
+    </svg>
+
     <nav class="nav" id="nav">
-        <a href="#" class="nav-logo">山と月と浜の家</a>
+        <a href="#top" class="nav-logo">山と月と浜の家</a>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#access">Access</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#story">はなし</a></li>
+            <li><a href="#rooms">へや</a></li>
+            <li><a href="#place">ばしょ</a></li>
+            <li><a href="#letter">おたより</a></li>
         </ul>
     </nav>
 
-    <section class="hero">
-        <img src="hamanoie-hero.jpeg" alt="山と月と浜の家 — 壁画のある座敷空間" class="hero-image">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-name">山と月と浜の家</h1>
-            <p class="hero-tagline">山と海のあいだの、小さな実験室。</p>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+        <!-- 座敷の 壁画 -->
+        <svg class="mural" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="座敷の壁画：月のランプ、飛ぶ鳥、つみかさなる石、うずまきの帯">
+            <defs>
+                <radialGradient id="glowGrad">
+                    <stop offset="0" stop-color="#FFE7A8" stop-opacity="0.85"/>
+                    <stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
+            <rect width="1200" height="760" fill="#F6F2E8"/>
+
+            <!-- うずまきの 帯（右うえ） -->
+            <g filter="url(#rough)">
+                <rect x="830" y="110" width="300" height="50" rx="14" fill="#1E5A56"/>
+                <rect x="1040" y="160" width="44" height="60" fill="#1E5A56"/>
+                <rect x="880" y="210" width="250" height="50" rx="14" fill="#1E5A56"/>
+                <rect x="1040" y="260" width="44" height="60" fill="#1E5A56"/>
+                <rect x="900" y="310" width="230" height="50" rx="14" fill="#1E5A56"/>
+            </g>
+            <g>
+                <use href="#spiral" x="848" y="113" width="44" height="44"/><use href="#spiral" x="900" y="113" width="44" height="44"/><use href="#spiral" x="952" y="113" width="44" height="44"/><use href="#spiral" x="1004" y="113" width="44" height="44"/><use href="#spiral" x="1066" y="113" width="44" height="44"/>
+                <use href="#spiral" x="898" y="213" width="44" height="44"/><use href="#spiral" x="950" y="213" width="44" height="44"/><use href="#spiral" x="1002" y="213" width="44" height="44"/><use href="#spiral" x="1066" y="213" width="44" height="44"/>
+                <use href="#spiral" x="918" y="313" width="44" height="44"/><use href="#spiral" x="970" y="313" width="44" height="44"/><use href="#spiral" x="1022" y="313" width="44" height="44"/><use href="#spiral" x="1074" y="313" width="44" height="44"/>
+                <g stroke="#F6F2E8" stroke-width="2.4"><path d="M1052 162 v56 M1062 162 v56 M1072 162 v56 M1052 262 v56 M1062 262 v56 M1072 262 v56"/></g>
+            </g>
+
+            <!-- うずまきの 帯（左した） -->
+            <g filter="url(#rough)">
+                <rect x="150" y="470" width="230" height="46" rx="14" fill="#1E5A56"/>
+                <rect x="300" y="516" width="40" height="56" fill="#1E5A56"/>
+                <rect x="150" y="572" width="210" height="46" rx="14" fill="#1E5A56"/>
+            </g>
+            <g>
+                <use href="#spiral" x="166" y="472" width="42" height="42"/><use href="#spiral" x="214" y="472" width="42" height="42"/><use href="#spiral" x="262" y="472" width="42" height="42"/><use href="#spiral" x="318" y="472" width="42" height="42"/>
+                <use href="#spiral" x="166" y="574" width="42" height="42"/><use href="#spiral" x="214" y="574" width="42" height="42"/><use href="#spiral" x="262" y="574" width="42" height="42"/><use href="#spiral" x="312" y="574" width="42" height="42"/>
+                <g stroke="#F6F2E8" stroke-width="2.4"><path d="M310 518 v52 M320 518 v52 M330 518 v52"/></g>
+            </g>
+
+            <!-- 月の ランプ -->
+            <circle class="glow" cx="600" cy="205" r="190" fill="url(#glowGrad)"/>
+            <line x1="600" y1="0" x2="600" y2="148" stroke="#6F6A62" stroke-width="2"/>
+            <g class="lamp" id="lamp">
+                <circle class="lamp-shade" cx="600" cy="205" r="58" fill="#F3D58A" filter="url(#rough)"/>
+                <path d="M565 180 Q600 160 635 180" stroke="#FFF4D2" stroke-width="5" fill="none" opacity="0.7" stroke-linecap="round"/>
+            </g>
+
+            <!-- つみかさなる 石（山） -->
+            <g filter="url(#rough)">
+                <path class="stone" d="M470 610 Q452 470 500 370 Q540 318 578 352 Q604 420 594 610 Z" fill="#252A3D"/>
+                <path class="stone" d="M602 610 L606 412 Q610 386 640 386 L722 386 Q748 386 750 412 L754 610 Z" fill="#5B4A37"/>
+                <path class="stone" d="M612 382 Q638 288 682 286 Q718 286 748 360 Q756 382 734 384 L632 384 Q608 384 612 382 Z" fill="#C3B65F"/>
+                <path class="stone" d="M772 528 Q760 430 802 418 Q842 424 852 500 Q856 534 830 536 L792 536 Q772 536 772 528 Z" fill="#1E2247"/>
+                <path class="stone" d="M758 610 L780 548 Q792 530 818 532 L884 544 Q930 566 968 610 Z" fill="#8F8E89"/>
+            </g>
+
+            <!-- 鳥 -->
+            <g class="bird" style="transform-origin: 400px 250px"><use href="#birdPath" transform="translate(400 250) rotate(-18)" fill="#23252E"/></g>
+            <g class="bird" style="transform-origin: 450px 330px"><use href="#birdPath" transform="translate(452 330) rotate(-24) scale(0.9)" fill="#23252E"/></g>
+            <g class="bird" style="transform-origin: 350px 380px"><use href="#birdPath" transform="translate(350 384) rotate(-14) scale(0.95)" fill="#23252E"/></g>
+
+            <!-- 床 -->
+            <rect y="680" width="1200" height="80" fill="#D3AA78"/>
+            <g stroke="#B58757" stroke-width="2" opacity="0.6"><path d="M0 702 H1200 M0 728 H1200 M0 752 H1200 M210 680 v22 M640 702 v26 M980 680 v22 M380 728 v24 M860 728 v24"/></g>
+            <rect y="672" width="1200" height="10" fill="#C79A68"/>
+
+            <rect class="night-veil" width="1200" height="760" fill="#14162A" opacity="0"/>
+        </svg>
+
+        <div class="hero-text">
+            <h1>山と月と浜の家</h1>
+            <p>山と海のあいだの、小さな実験室。</p>
         </div>
-        <div class="scroll-indicator"><span></span></div>
+        <p class="hero-hint">月の ランプを おすと……？</p>
+
+        <!-- ふすま -->
+        <div class="fusuma" id="fusuma">
+            <div class="kamoi"></div>
+            <div class="ranma"><span></span><span></span><span></span><span></span></div>
+            <div class="panels">
+                <div class="panel">
+                    <svg viewBox="0 0 200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g filter="url(#print)">
+                        <path d="M98 190 Q104 300 96 400" stroke="#4FAE84" stroke-width="7" fill="none"/>
+                        <use href="#leaf" x="18" y="58" width="160" height="160"/>
+                    </g></svg>
+                    <span class="hikite"></span>
+                </div>
+                <div class="panel">
+                    <svg viewBox="0 0 200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g filter="url(#print)">
+                        <path d="M84 170 Q76 300 82 400" stroke="#4FAE84" stroke-width="7" fill="none"/>
+                        <path d="M140 300 Q146 350 142 400" stroke="#4FAE84" stroke-width="5" fill="none"/>
+                        <use href="#leaf" x="-6" y="34" width="176" height="176"/>
+                        <use href="#leaf" x="96" y="218" width="94" height="94"/>
+                    </g></svg>
+                    <span class="hikite"></span>
+                </div>
+                <div class="panel">
+                    <svg viewBox="0 0 200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g filter="url(#print)">
+                        <path d="M120 190 Q126 300 120 400" stroke="#4FAE84" stroke-width="7" fill="none"/>
+                        <path d="M64 290 Q58 350 62 400" stroke="#4FAE84" stroke-width="5" fill="none"/>
+                        <use href="#leaf" x="28" y="60" width="190" height="190"/>
+                        <use href="#leaf" x="14" y="214" width="100" height="100"/>
+                    </g></svg>
+                    <span class="hikite"></span>
+                </div>
+                <div class="panel">
+                    <svg viewBox="0 0 200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g filter="url(#print)">
+                        <path d="M92 170 Q86 300 92 400" stroke="#4FAE84" stroke-width="7" fill="none"/>
+                        <use href="#leaf" x="0" y="40" width="168" height="168"/>
+                    </g></svg>
+                    <span class="hikite"></span>
+                </div>
+            </div>
+            <div class="shikii"></div>
+            <div class="noren" aria-hidden="true">山と月と浜の家</div>
+            <button class="knock" id="knock" type="button">おじゃまします</button>
+        </div>
     </section>
 
-    <section class="about" id="about">
-        <div class="container">
-            <p class="section-label reveal">About</p>
-            <div class="about-text">
-                <p class="reveal">秋田県にかほ町の空き家をリノベーションした<br>アトリエスペースです。</p>
-                <p class="reveal">手仕事、AI、対話、表現——<br>そのとき関心のあることを持ち寄って、<br>小さく実験するための場所。</p>
-                <p class="about-note reveal">イベント時のみオープンしています。</p>
+    <!-- ===== この家の はなし ===== -->
+    <section class="sec" id="story">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <svg viewBox="0 0 110 26" aria-hidden="true"><rect width="110" height="26" rx="8" fill="#1E5A56" filter="url(#rough)"/><use href="#spiral" x="4" y="1" width="24" height="24"/><use href="#spiral" x="30" y="1" width="24" height="24"/><use href="#spiral" x="56" y="1" width="24" height="24"/><use href="#spiral" x="82" y="1" width="24" height="24"/></svg>
+                <h2>この家の はなし</h2>
+                <span class="en">story</span>
+            </div>
+            <div class="story">
+                <div class="story-text reveal">
+                    <p>むかし、この家には<br>英語の先生が ひとりで 住んでいました。</p>
+                    <p>先生が いなくなって、<br>大きな家は 空き家に なりました。</p>
+                    <p>それを、なぜか 父が 買いました。</p>
+                    <p>それから 数年、家は<br>ほとんど 使われないまま 眠っていました。</p>
+                    <p>もったいないなあ と思って、<br>少しずつ 手を入れて、ひらいて みることに。</p>
+                    <p class="last">いまは、山と海のあいだの 小さな実験室。<br>手仕事、AI、対話、表現——<br>そのとき 関心のあることを 持ち寄る 場所です。</p>
+                    <!-- 運営について 書くときは ここに 一段落 たす -->
+                </div>
+                <svg class="story-stones reveal" viewBox="0 0 220 260" aria-hidden="true">
+                    <g filter="url(#rough)">
+                        <circle cx="120" cy="40" r="26" fill="#F3D58A"/>
+                        <path d="M30 250 Q20 160 52 110 Q76 84 96 104 Q110 150 104 250 Z" fill="#252A3D"/>
+                        <path d="M108 250 L110 150 Q112 136 128 136 L168 136 Q182 136 184 150 L186 250 Z" fill="#5B4A37"/>
+                        <path d="M114 134 Q128 86 150 84 Q170 84 184 124 Q188 134 176 134 Z" fill="#C3B65F"/>
+                        <path d="M178 250 L188 214 Q194 204 206 206 L214 210 Q220 230 220 250 Z" fill="#8F8E89"/>
+                    </g>
+                </svg>
             </div>
         </div>
     </section>
 
-    <section class="gallery">
-        <div class="container">
-            <p class="section-label reveal">Space</p>
-            <div class="gallery-grid">
-                <div class="gallery-item tall reveal"><img src="hamanoie-fusuma.jpeg" alt="蓮の葉が描かれたふすま" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="hamanoie-chair.jpeg" alt="窓辺のロッキングチェアと作品棚" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="hamanoie-plants.jpeg" alt="植物と本棚のある窓辺" loading="lazy"></div>
-                <div class="gallery-item wide reveal"><img src="hamanoie-kitchen.jpeg" alt="キッチンとダイニングテーブル" loading="lazy"></div>
+    <!-- ===== へや ===== -->
+    <section class="sec" id="rooms">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <svg viewBox="0 0 110 26" aria-hidden="true"><rect width="110" height="26" rx="8" fill="#1E5A56" filter="url(#rough)"/><use href="#spiral" x="4" y="1" width="24" height="24"/><use href="#spiral" x="30" y="1" width="24" height="24"/><use href="#spiral" x="56" y="1" width="24" height="24"/><use href="#spiral" x="82" y="1" width="24" height="24"/></svg>
+                <h2>へや</h2>
+                <span class="en">rooms</span>
+            </div>
+            <div class="rooms">
+                <button class="photo wide reveal" type="button"><img src="hamanoie-hero.jpeg" alt="壁画のある座敷と、ながい座卓" loading="lazy"><figcaption>壁画の ある 座敷</figcaption></button>
+                <button class="photo reveal" type="button"><img src="hamanoie-fusuma.jpeg" alt="大きな葉っぱが刷られたふすま" loading="lazy"><figcaption>葉っぱの ふすま</figcaption></button>
+                <button class="photo reveal" type="button"><img src="hamanoie-chair.jpeg" alt="窓辺のロッキングチェアと作品棚" loading="lazy"><figcaption>窓辺の ロッキングチェア</figcaption></button>
+                <button class="photo reveal" type="button"><img src="hamanoie-plants.jpeg" alt="植物と本棚のある窓辺" loading="lazy"><figcaption>植物と 本棚</figcaption></button>
+                <button class="photo reveal" type="button"><img src="hamanoie-kitchen.jpeg" alt="キッチンとダイニングテーブル" loading="lazy"><figcaption>キッチン</figcaption></button>
             </div>
         </div>
     </section>
 
-    <section class="access" id="access">
-        <div class="container">
-            <p class="section-label reveal">Access</p>
-            <div class="access-info reveal">
-                <p class="label">所在地</p>
-                <p>秋田県にかほ市</p>
-                <p class="label">最寄駅</p>
-                <p>JR 象潟（きさかた）駅より徒歩10分（700m）</p>
+    <!-- ===== ばしょ ===== -->
+    <section class="sec" id="place">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <svg viewBox="0 0 110 26" aria-hidden="true"><rect width="110" height="26" rx="8" fill="#1E5A56" filter="url(#rough)"/><use href="#spiral" x="4" y="1" width="24" height="24"/><use href="#spiral" x="30" y="1" width="24" height="24"/><use href="#spiral" x="56" y="1" width="24" height="24"/><use href="#spiral" x="82" y="1" width="24" height="24"/></svg>
+                <h2>ばしょ</h2>
+                <span class="en">place</span>
             </div>
-            <div class="access-caution reveal">
-                現在は居住スペースとなっております。<br>
-                詳しい所在地は、イベント参加者の方に個別にお知らせいたします。<br>
-                ※ 突然の訪問等はご遠慮ください。<br>
-                ※ スペースのレンタルはしておりません。
+            <dl class="place reveal">
+                <dt>ところ</dt><dd>秋田県にかほ市（鳥海山と 日本海の あいだ）</dd>
+                <dt>えき</dt><dd>JR 象潟（きさかた）駅から 歩いて 10分くらい</dd>
+                <dt>ひらく日</dt><dd>イベントの ときだけ</dd>
+            </dl>
+            <div class="notice reveal">
+                いまは 住まいとしても 使っています。<br>
+                くわしい場所は、イベントに 参加される方に 個別に お知らせします。<br>
+                ※ とつぜんの ご訪問は ご遠慮ください。<br>
+                ※ スペースの レンタルは しておりません。
             </div>
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <div class="container">
-            <p class="section-label reveal">Contact</p>
-            <p class="contact-text reveal">お問い合わせは<br>こちらのフォームよりお願いいたします。</p>
-            <a href="https://forms.gle/1YHcaffn8vGJJfLJA" target="_blank" rel="noopener" class="contact-link reveal">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 13 11 15 15 11"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
-                お問い合わせフォーム
-            </a>
+    <!-- ===== おたより ===== -->
+    <section class="sec" id="letter">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <svg viewBox="0 0 110 26" aria-hidden="true"><rect width="110" height="26" rx="8" fill="#1E5A56" filter="url(#rough)"/><use href="#spiral" x="4" y="1" width="24" height="24"/><use href="#spiral" x="30" y="1" width="24" height="24"/><use href="#spiral" x="56" y="1" width="24" height="24"/><use href="#spiral" x="82" y="1" width="24" height="24"/></svg>
+                <h2>おたより</h2>
+                <span class="en">letter</span>
+            </div>
+            <p class="letter-text reveal">お問い合わせは、こちらの フォームから どうぞ。</p>
+            <a class="btn reveal" href="https://forms.gle/1YHcaffn8vGJJfLJA" target="_blank" rel="noopener">おたよりを 書く</a>
         </div>
     </section>
 
     <footer class="footer">
-        <p class="footer-text">&copy; 2026 山と月と浜の家</p>
-        <p class="footer-owner"><a href="https://www.emisuto.com" target="_blank" rel="noopener">Emi Suto</a></p>
+        <svg viewBox="0 0 140 70" aria-hidden="true">
+            <g filter="url(#rough)">
+                <circle cx="70" cy="18" r="12" fill="#F3D58A"/>
+                <path d="M30 70 Q26 44 40 32 Q52 26 56 40 Q60 56 58 70 Z" fill="#252A3D"/>
+                <path d="M62 70 L64 44 Q66 38 72 38 L88 38 Q94 38 94 44 L96 70 Z" fill="#5B4A37"/>
+                <path d="M98 70 L104 56 Q108 52 114 54 L124 58 Q132 64 134 70 Z" fill="#8F8E89"/>
+            </g>
+        </svg>
+        <p>&copy; 2026 山と月と浜の家</p>
+        <p>うんえい：<a href="https://www.emisuto.com" target="_blank" rel="noopener">すとうえみ</a></p>
     </footer>
 
+    <div class="lightbox" id="lightbox" hidden>
+        <figure><img id="lbImg" alt=""><p id="lbCap"></p></figure>
+    </div>
+
     <script>
+    (() => {
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const hero = document.querySelector('.hero');
+        const fusuma = document.getElementById('fusuma');
+
+        /* ふすまを あける */
+        let opened = false;
+        function openFusuma() {
+            if (opened) return;
+            opened = true;
+            fusuma.classList.add('open');
+            setTimeout(() => fusuma.classList.add('gone'), reduce ? 0 : 1700);
+        }
+        document.getElementById('knock').addEventListener('click', openFusuma);
+        fusuma.addEventListener('click', openFusuma);
+        window.addEventListener('wheel', openFusuma, { once: true, passive: true });
+        window.addEventListener('touchmove', openFusuma, { once: true, passive: true });
+        window.addEventListener('keydown', e => { if ([' ', 'Enter', 'ArrowDown', 'PageDown'].includes(e.key)) openFusuma(); });
+        if (location.hash && location.hash !== '#top') openFusuma();
+        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', openFusuma));
+
+        /* 月の ランプ：おすと あかりが つく / きえる */
+        document.getElementById('lamp').addEventListener('click', () => hero.classList.toggle('lights-off'));
+
+        /* 石：おすと ころん */
+        document.querySelectorAll('.mural .stone').forEach(s => s.addEventListener('click', () => {
+            s.classList.remove('wobble'); void s.getBoundingClientRect(); s.classList.add('wobble');
+        }));
+
+        /* 鳥：おすと とんでいって、しばらくして もどってくる */
+        document.querySelectorAll('.mural .bird').forEach(b => b.addEventListener('click', () => {
+            if (b.classList.contains('away')) return;
+            b.classList.add('away');
+            setTimeout(() => b.classList.remove('away'), 4200);
+        }));
+
+        /* 写真を おおきく */
+        const lb = document.getElementById('lightbox');
+        document.querySelectorAll('.photo').forEach(p => p.addEventListener('click', () => {
+            const img = p.querySelector('img');
+            document.getElementById('lbImg').src = img.src;
+            document.getElementById('lbImg').alt = img.alt;
+            document.getElementById('lbCap').textContent = p.querySelector('figcaption').textContent;
+            lb.hidden = false;
+        }));
+        lb.addEventListener('click', () => { lb.hidden = true; });
+        window.addEventListener('keydown', e => { if (e.key === 'Escape') lb.hidden = true; });
+
+        /* ナビと ふわっと */
         const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 80);
-        });
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), index * 80);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-        reveals.forEach(el => observer.observe(el));
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 80), { passive: true });
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+        }), { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    })();
     </script>
 </body>
 </html>
